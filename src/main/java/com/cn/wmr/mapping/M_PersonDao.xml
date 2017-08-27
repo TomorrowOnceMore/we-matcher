@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.wmr.dao.M_PersonDao" >
+  <resultMap id="BaseResultMap" type="com.cn.wmr.pojo.M_Person" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="mr_name" property="mr_name" jdbcType="VARCHAR" />
+    <result column="mr_sex" property="mr_sex" jdbcType="VARCHAR" />
+    <result column="mr_phone" property="mr_phone" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, mr_name, mr_sex, mr_phone,address
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from mr_t
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from mr_t
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.wmr.pojo.M_Person" >
+    insert into mr_t (id, mr_name, mr_sex, mr_phone,address)
+    values (#{id,jdbcType=INTEGER}, #{mr_name,jdbcType=VARCHAR}, #{mr_sex,jdbcType=VARCHAR}, #{mr_phone,jdbcType=VARCHAR},#{address,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.wmr.pojo.M_Person" >
+    insert into mr_t
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="mr_name != null" >
+        mr_name,
+      </if>
+      <if test="mr_sex != null" >
+        mr_sex,
+      </if>
+      <if test="mr_phone != null" >
+        mr_phone,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="mr_name != null" >
+        #{mr_name,jdbcType=VARCHAR},
+      </if>
+      <if test="mr_sex != null" >
+        #{mr_sex,jdbcType=VARCHAR},
+      </if>
+      <if test="mr_phone != null" >
+        #{mr_phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.wmr.pojo.M_Person" >
+    update mr_t
+    <set >
+      <if test="mr_name != null" >
+        mr_name = #{mr_name,jdbcType=VARCHAR},
+      </if>
+      <if test="mr_sex != null" >
+        mr_sex = #{mr_sex,jdbcType=VARCHAR},
+      </if>
+      <if test="mr_phone != null" >
+        mr_phone = #{mr_phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.wmr.pojo.M_Person" >
+    update mr_t
+    set mr_name = #{mr_name,jdbcType=VARCHAR},
+      mr_sex = #{mr_sex,jdbcType=VARCHAR},
+      mr_phone = #{mr_phone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

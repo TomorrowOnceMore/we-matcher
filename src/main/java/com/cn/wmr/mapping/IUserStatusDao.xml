@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.wmr.dao.IUserStatusDao" >
+  <resultMap id="BaseResultMap" type="com.cn.wmr.pojo.User_Status" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="love" property="love" jdbcType="VARCHAR" />
+    <result column="be_loved" property="be_loved" jdbcType="VARCHAR" />
+    <result column="date_status" property="date_status" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, love, be_loved, date_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_status
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_status
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.wmr.pojo.User_Status" >
+    insert into user_status (id, love, be_loved, date_status)
+    values (#{id,jdbcType=INTEGER}, #{love,jdbcType=VARCHAR}, #{be_loved,jdbcType=VARCHAR}, #{date_status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.wmr.pojo.User_Status" >
+    insert into user_status
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+        love,
+        be_loved,
+      <if test="date_status != null" >
+        date_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+        #{love,jdbcType=VARCHAR},
+        #{be_loved,jdbcType=VARCHAR},
+      <if test="date_status != null" >
+        #{date_status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.wmr.pojo.User_Status" >
+    update user_status
+    <set >
+        love = #{love,jdbcType=VARCHAR},
+        be_loved = #{be_loved,jdbcType=VARCHAR},
+      <if test="date_status != null" >
+        date_status = #{date_status,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.wmr.pojo.User_Status" >
+    update user_status
+    set love = #{love,jdbcType=VARCHAR},
+      be_loved = #{be_loved,jdbcType=VARCHAR},
+      date_status = #{date_status,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
